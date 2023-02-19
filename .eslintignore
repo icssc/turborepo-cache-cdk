@@ -1,0 +1,4 @@
+.cdk.staging
+cdk.out
+build
+dist
