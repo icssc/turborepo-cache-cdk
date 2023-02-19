@@ -23,6 +23,9 @@
       "path": "cz-conventional-changelog"
     }
   },
+  "dependencies": {
+    "turborepo-remote-cache": "^1.13.0"
+  },
   "devDependencies": {
     "@commitlint/cli": "^17.4.2",
     "@commitlint/config-conventional": "^17.4.2",
@@ -30,6 +33,7 @@
     "@typescript-eslint/parser": "^5.48.2",
     "cz-conventional-changelog": "^3.3.0",
     "dotenv-cli": "^7.0.0",
+    "esbuild": "^0.17.9",
     "eslint": "^8.32.0",
     "eslint-config-prettier": "^8.6.0",
     "eslint-import-resolver-typescript": "^3.5.3",
