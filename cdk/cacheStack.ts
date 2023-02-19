@@ -35,44 +35,47 @@ export default class CacheStack extends Stack {
     const { TURBO_TOKEN } = process.env;
     new RestApi(this, "turborepo-cache-api", {
       restApiName: "turborepo-cache-api",
-    }).root.addMethod(
-      "ANY",
-      new LambdaIntegration(
-        new Function(this, "turborepo-cache-lambda", {
-          code: Code.fromAsset(
-            join(dirname(fileURLToPath(import.meta.url)), "../dist")
-          ),
-          environment: {
-            STORAGE_PATH: "turborepo-cache-bucket",
-            STORAGE_PROVIDER: "s3",
-            TURBO_TOKEN,
-          },
-          functionName: "turborepo-cache-lambda",
-          handler: "index.handler",
-          role: new Role(this, "turborepo-cache-lambda-role", {
-            assumedBy: new ServicePrincipal("lambda.amazonaws.com"),
-            managedPolicies: [
-              ManagedPolicy.fromAwsManagedPolicyName(
-                "service-role/AWSLambdaBasicExecutionRole"
-              ),
-            ],
-            inlinePolicies: {
-              policy: new PolicyDocument({
-                statements: [
-                  new PolicyStatement({
-                    effect: Effect.ALLOW,
-                    actions: ["s3:*"],
-                    resources: [bucket.bucketArn, `${bucket.bucketArn}/*`],
-                  }),
-                ],
-              }),
+    }).root
+      .addResource("{proxy+}")
+      .addMethod(
+        "ANY",
+        new LambdaIntegration(
+          new Function(this, "turborepo-cache-lambda", {
+            code: Code.fromAsset(
+              join(dirname(fileURLToPath(import.meta.url)), "../dist")
+            ),
+            environment: {
+              STORAGE_PATH: "turborepo-cache-bucket",
+              STORAGE_PROVIDER: "s3",
+              TURBO_TOKEN,
             },
-            roleName: "turborepo-cache-lambda-role",
-          }),
-          runtime: Runtime.NODEJS_16_X,
-          timeout: Duration.seconds(10),
-        })
-      )
-    );
+            functionName: "turborepo-cache-lambda",
+            handler: "index.handler",
+            memorySize: 512,
+            role: new Role(this, "turborepo-cache-lambda-role", {
+              assumedBy: new ServicePrincipal("lambda.amazonaws.com"),
+              managedPolicies: [
+                ManagedPolicy.fromAwsManagedPolicyName(
+                  "service-role/AWSLambdaBasicExecutionRole"
+                ),
+              ],
+              inlinePolicies: {
+                policy: new PolicyDocument({
+                  statements: [
+                    new PolicyStatement({
+                      effect: Effect.ALLOW,
+                      actions: ["s3:*"],
+                      resources: [bucket.bucketArn, `${bucket.bucketArn}/*`],
+                    }),
+                  ],
+                }),
+              },
+              roleName: "turborepo-cache-lambda-role",
+            }),
+            runtime: Runtime.NODEJS_16_X,
+            timeout: Duration.seconds(15),
+          })
+        )
+      );
   }
 }
