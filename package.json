@@ -6,7 +6,7 @@
   "scripts": {
     "build": "esbuild src/index.mjs --bundle --minify --platform=node --target=node16 --outfile=dist/index.cjs",
     "commit": "cz",
-    "deploy": "dotenv -c production -- cdk deploy --all --require-approval never",
+    "deploy": "cdk deploy --all --require-approval never",
     "format": "prettier --write .",
     "postinstall": "husky install",
     "lint": "eslint --fix ."
@@ -40,7 +40,6 @@
     "@typescript-eslint/parser": "^5.48.2",
     "aws-cdk": "^2.65.0",
     "cz-conventional-changelog": "^3.3.0",
-    "dotenv-cli": "^7.0.0",
     "esbuild": "^0.17.9",
     "eslint": "^8.32.0",
     "eslint-config-prettier": "^8.6.0",

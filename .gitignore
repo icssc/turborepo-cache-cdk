@@ -20,7 +20,7 @@ yarn-error.log*
 .env
 .env.development
 .env.test
-.env.production
+.env
 
 # jetbrains
 .idea/
