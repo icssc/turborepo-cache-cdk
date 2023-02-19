@@ -26,6 +26,6 @@
     "strictPropertyInitialization": false,
     "target": "ES2020"
   },
-  "exclude": ["build/", "dist/", "node_modules/"],
-  "include": ["src/**/*"]
+  "exclude": ["cdk.out/", "dist/", "node_modules/"],
+  "include": ["cdk/**/*", "src/**/*"]
 }

@@ -6,6 +6,7 @@
   "scripts": {
     "build": "esbuild src/index.mjs --bundle --minify --platform=node --target=node16 --outfile=dist/index.cjs",
     "commit": "cz",
+    "deploy": "dotenv -c production -- cdk deploy --all --require-approval never",
     "format": "prettier --write .",
     "postinstall": "husky install",
     "lint": "eslint --fix ."
@@ -25,13 +26,19 @@
     }
   },
   "dependencies": {
+    "aws-cdk-lib": "^2.65.0",
+    "constructs": "^10.1.255",
+    "source-map-support": "^0.5.21",
     "turborepo-remote-cache": "^1.13.0"
   },
   "devDependencies": {
     "@commitlint/cli": "^17.4.2",
     "@commitlint/config-conventional": "^17.4.2",
+    "@types/babel__traverse": "^7.18.3",
+    "@types/node": "^18.14.0",
     "@typescript-eslint/eslint-plugin": "^5.48.2",
     "@typescript-eslint/parser": "^5.48.2",
+    "aws-cdk": "^2.65.0",
     "cz-conventional-changelog": "^3.3.0",
     "dotenv-cli": "^7.0.0",
     "esbuild": "^0.17.9",
@@ -44,6 +51,7 @@
     "lint-staged": "^13.1.0",
     "prettier": "^2.8.3",
     "prettier-plugin-packagejson": "^2.4.0",
+    "tsx": "^3.12.3",
     "typescript": "^4.9.5"
   },
   "packageManager": "npm@8.19.3",
