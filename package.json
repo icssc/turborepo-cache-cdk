@@ -4,6 +4,7 @@
   "private": true,
   "type": "module",
   "scripts": {
+    "build": "esbuild src/index.mjs --bundle --minify --platform=node --target=node16 --outfile=dist/index.cjs",
     "commit": "cz",
     "format": "prettier --write .",
     "postinstall": "husky install",
