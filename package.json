@@ -32,6 +32,8 @@
     "turborepo-remote-cache": "^1.13.0"
   },
   "devDependencies": {
+    "@aws-cdk/aws-apigatewayv2-alpha": "^2.66.1-alpha.0",
+    "@aws-cdk/aws-apigatewayv2-integrations-alpha": "^2.66.1-alpha.0",
     "@commitlint/cli": "^17.4.2",
     "@commitlint/config-conventional": "^17.4.2",
     "@types/babel__traverse": "^7.18.3",
